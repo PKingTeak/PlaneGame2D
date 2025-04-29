@@ -14,10 +14,10 @@ public class Obstacle : MonoBehaviour
     public Transform topObejct;
     public Transform bottomObject;
     //나열할 오브젝트들 
-    public float widthPadding = 4f; 
+    public float widthPadding = 4f;
     //오브젝트를 배치할때 사이 폭을 얼만큼 설정해 줄지 정해주는 변수 
     //즉 첫번재 블록이 생성되고 다음 블록이 생성될때까지의 넓이를 의미하는 변수이다. 
-
+  
     public Vector3 SetRandomPlace(Vector3 lastPosition , int ObstacleCount)
     {
         float holeSize = Random.Range(holeSizeMin,holeSizeMax); //구멍 크기 설정
@@ -33,6 +33,17 @@ public class Obstacle : MonoBehaviour
 
         return placePosition;
 
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            GameManager.Instance.AddScore(1);
+        }
+        
+        
     }
 
 

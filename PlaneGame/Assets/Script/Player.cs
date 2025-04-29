@@ -15,9 +15,17 @@ public class Player : MonoBehaviour
     bool isFlap = false ; //점프를 했는지 확인
     public bool godMode = false;  //디버그 용으로 사용할 것이다. 
 
+
+    //GameManager gameManager;
+    
     // Start is called before the first frame update
     void Start()
     {
+      //  gameManager = GameManager.Instance;//사실 받아서 사용하지 않아도 된다 그냥 이건 스타일의 차이라고 생각하자. 
+      //장점은 있다 메모리를 미묘하게 조금 더 사용하느거 뿐이지만 만약에 player에서도 awake()를 사용하게 되면 꼬일수가 있다. 
+        // 내스타일대로 하면 그냥 GameManager.Instace.매서드 이런식으로 그냥 사용하는게 좀더 편한거 같다.  구지 메모리를 복사하여 사용하는 것 보다 그냥 사용하는게 구지 싱글톤 했는데? 라는 생각이다. 
+
+
         animator = GetComponentInChildren<Animator>(); //자식 객체의 컴포넌트를 가져올수 있는 함수이다. 
         rigid2D  = GetComponent<Rigidbody2D>();
 
@@ -41,7 +49,10 @@ public class Player : MonoBehaviour
         {
             if(deathCooldown <= 0)
             {
-                
+                if(Input.GetKeyDown(KeyCode.R))
+                {
+                    GameManager.Instance.RestartGame();
+                }
             }
             else
             {
@@ -97,6 +108,7 @@ public class Player : MonoBehaviour
         deathCooldown = 1f;
 
         animator.SetInteger("IsDie",1); //1로 바꾸면 애니메이션 바꾸는것
+        GameManager.Instance.GameOver();
         
     }
    
