@@ -22,7 +22,7 @@ public class Obstacle : MonoBehaviour
     {
         float holeSize = Random.Range(holeSizeMin,holeSizeMax); //구멍 크기 설정
         float halfHoleSize = holeSize/2; //절반 크기 
-        topObejct.localPosition = new Vector3(0,halfHoleSize);
+        topObejct.localPosition = new Vector3(0,halfHoleSize); 
         bottomObject.localPosition = new Vector3(0,-halfHoleSize);
         //위 아래 반대로 설치되어야 된다. 그래야 공간이 생긴다. 
 
